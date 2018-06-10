@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    SearchRequest *request = [SearchRequest new];
+    ArtSearchRequest *request = [ArtSearchRequest new];
     request.query = @"aaa";
     request.pageNumber = 10;
     request.resultPerPage = 20;
@@ -26,7 +26,7 @@
     NSData *data = [request data];
     
     //解码
-    SearchRequest *search = [SearchRequest parseFromData:data error:nil];
+    ArtSearchRequest *search = [ArtSearchRequest parseFromData:data error:nil];
     NSLog(@"searchRequest:%@",search);
 }
 

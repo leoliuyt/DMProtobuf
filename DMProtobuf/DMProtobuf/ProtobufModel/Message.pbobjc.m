@@ -19,43 +19,44 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-#pragma mark - MessageRoot
+#pragma mark - ArtMessageRoot
 
-@implementation MessageRoot
+@implementation ArtMessageRoot
 
 // No extensions in the file and no imports, so no need to generate
 // +extensionRegistry.
 
 @end
 
-#pragma mark - MessageRoot_FileDescriptor
+#pragma mark - ArtMessageRoot_FileDescriptor
 
-static GPBFileDescriptor *MessageRoot_FileDescriptor(void) {
+static GPBFileDescriptor *ArtMessageRoot_FileDescriptor(void) {
   // This is called by +initialize so there is no need to worry
   // about thread safety of the singleton.
   static GPBFileDescriptor *descriptor = NULL;
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@""
+                                                 objcPrefix:@"Art"
                                                      syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
 
-#pragma mark - SearchRequest
+#pragma mark - ArtSearchRequest
 
-@implementation SearchRequest
+@implementation ArtSearchRequest
 
 @dynamic query;
 @dynamic pageNumber;
 @dynamic resultPerPage;
 
-typedef struct SearchRequest__storage_ {
+typedef struct ArtSearchRequest__storage_ {
   uint32_t _has_storage_[1];
   int32_t pageNumber;
   int32_t resultPerPage;
   NSString *query;
-} SearchRequest__storage_;
+} ArtSearchRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -66,38 +67,266 @@ typedef struct SearchRequest__storage_ {
       {
         .name = "query",
         .dataTypeSpecific.className = NULL,
-        .number = SearchRequest_FieldNumber_Query,
+        .number = ArtSearchRequest_FieldNumber_Query,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SearchRequest__storage_, query),
+        .offset = (uint32_t)offsetof(ArtSearchRequest__storage_, query),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "pageNumber",
         .dataTypeSpecific.className = NULL,
-        .number = SearchRequest_FieldNumber_PageNumber,
+        .number = ArtSearchRequest_FieldNumber_PageNumber,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SearchRequest__storage_, pageNumber),
+        .offset = (uint32_t)offsetof(ArtSearchRequest__storage_, pageNumber),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "resultPerPage",
         .dataTypeSpecific.className = NULL,
-        .number = SearchRequest_FieldNumber_ResultPerPage,
+        .number = ArtSearchRequest_FieldNumber_ResultPerPage,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SearchRequest__storage_, resultPerPage),
+        .offset = (uint32_t)offsetof(ArtSearchRequest__storage_, resultPerPage),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SearchRequest class]
-                                     rootClass:[MessageRoot class]
-                                          file:MessageRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[ArtSearchRequest class]
+                                     rootClass:[ArtMessageRoot class]
+                                          file:ArtMessageRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SearchRequest__storage_)
+                                   storageSize:sizeof(ArtSearchRequest__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - ArtTypeTest
+
+@implementation ArtTypeTest
+
+@dynamic floatValue;
+@dynamic doubleValue;
+@dynamic boolValue;
+@dynamic int32Value;
+@dynamic stringValue;
+@dynamic state;
+@dynamic data_p;
+@dynamic hasTestObj, testObj;
+@dynamic objListArray, objListArray_Count;
+
+typedef struct ArtTypeTest__storage_ {
+  uint32_t _has_storage_[1];
+  float floatValue;
+  int32_t int32Value;
+  ArtTypeTest_State state;
+  NSString *stringValue;
+  NSData *data_p;
+  ArtTestObject *testObj;
+  NSMutableArray *objListArray;
+  double doubleValue;
+} ArtTypeTest__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "floatValue",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_FloatValue,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, floatValue),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeFloat,
+      },
+      {
+        .name = "doubleValue",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_DoubleValue,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, doubleValue),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "boolValue",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_BoolValue,
+        .hasIndex = 2,
+        .offset = 3,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "int32Value",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_Int32Value,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, int32Value),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "stringValue",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_StringValue,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, stringValue),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "state",
+        .dataTypeSpecific.enumDescFunc = ArtTypeTest_State_EnumDescriptor,
+        .number = ArtTypeTest_FieldNumber_State,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, state),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
+        .dataType = GPBDataTypeEnum,
+      },
+      {
+        .name = "data_p",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTypeTest_FieldNumber_Data_p,
+        .hasIndex = 7,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, data_p),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
+      },
+      {
+        .name = "testObj",
+        .dataTypeSpecific.className = GPBStringifySymbol(ArtTestObject),
+        .number = ArtTypeTest_FieldNumber_TestObj,
+        .hasIndex = 8,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, testObj),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "objListArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(ArtTestObject),
+        .number = ArtTypeTest_FieldNumber_ObjListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(ArtTypeTest__storage_, objListArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ArtTypeTest class]
+                                     rootClass:[ArtMessageRoot class]
+                                          file:ArtMessageRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ArtTypeTest__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\002\010\007\000\t\000objList\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+int32_t ArtTypeTest_State_RawValue(ArtTypeTest *message) {
+  GPBDescriptor *descriptor = [ArtTypeTest descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:ArtTypeTest_FieldNumber_State];
+  return GPBGetMessageInt32Field(message, field);
+}
+
+void SetArtTypeTest_State_RawValue(ArtTypeTest *message, int32_t value) {
+  GPBDescriptor *descriptor = [ArtTypeTest descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:ArtTypeTest_FieldNumber_State];
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
+}
+
+#pragma mark - Enum ArtTypeTest_State
+
+GPBEnumDescriptor *ArtTypeTest_State_EnumDescriptor(void) {
+  static GPBEnumDescriptor *descriptor = NULL;
+  if (!descriptor) {
+    static const char *valueNames =
+        "StateNone\000Down\000Move\000Up\000";
+    static const int32_t values[] = {
+        ArtTypeTest_State_StateNone,
+        ArtTypeTest_State_Down,
+        ArtTypeTest_State_Move,
+        ArtTypeTest_State_Up,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(ArtTypeTest_State)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:ArtTypeTest_State_IsValidValue];
+    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL ArtTypeTest_State_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case ArtTypeTest_State_StateNone:
+    case ArtTypeTest_State_Down:
+    case ArtTypeTest_State_Move:
+    case ArtTypeTest_State_Up:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
+#pragma mark - ArtTestObject
+
+@implementation ArtTestObject
+
+@dynamic name;
+
+typedef struct ArtTestObject__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *name;
+} ArtTestObject__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "name",
+        .dataTypeSpecific.className = NULL,
+        .number = ArtTestObject_FieldNumber_Name,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ArtTestObject__storage_, name),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ArtTestObject class]
+                                     rootClass:[ArtMessageRoot class]
+                                          file:ArtMessageRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ArtTestObject__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;

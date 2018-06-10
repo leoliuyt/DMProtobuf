@@ -6,5 +6,5 @@ target 'DMProtobuf' do
   # use_frameworks!
 
   # Pods for DMProtobuf
-pod 'Protobuf', '~> 3.4.0'
+pod 'Protobuf', '~> 3.6.0'
 end

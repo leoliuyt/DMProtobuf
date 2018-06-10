@@ -27,9 +27,40 @@
 
 CF_EXTERN_C_BEGIN
 
+@class ArtTestObject;
+
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - MessageRoot
+#pragma mark - Enum ArtTypeTest_State
+
+typedef GPB_ENUM(ArtTypeTest_State) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  ArtTypeTest_State_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  ArtTypeTest_State_StateNone = 0,
+
+  /** 按下 */
+  ArtTypeTest_State_Down = 1,
+
+  /** 移动 */
+  ArtTypeTest_State_Move = 2,
+
+  /** 抬起 */
+  ArtTypeTest_State_Up = 3,
+};
+
+GPBEnumDescriptor *ArtTypeTest_State_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL ArtTypeTest_State_IsValidValue(int32_t value);
+
+#pragma mark - ArtMessageRoot
 
 /**
  * Exposes the extension registry for this file.
@@ -41,18 +72,18 @@ NS_ASSUME_NONNULL_BEGIN
  * which is a @c GPBExtensionRegistry that includes all the extensions defined by
  * this file and all files that it depends on.
  **/
-@interface MessageRoot : GPBRootObject
+@interface ArtMessageRoot : GPBRootObject
 @end
 
-#pragma mark - SearchRequest
+#pragma mark - ArtSearchRequest
 
-typedef GPB_ENUM(SearchRequest_FieldNumber) {
-  SearchRequest_FieldNumber_Query = 1,
-  SearchRequest_FieldNumber_PageNumber = 2,
-  SearchRequest_FieldNumber_ResultPerPage = 3,
+typedef GPB_ENUM(ArtSearchRequest_FieldNumber) {
+  ArtSearchRequest_FieldNumber_Query = 1,
+  ArtSearchRequest_FieldNumber_PageNumber = 2,
+  ArtSearchRequest_FieldNumber_ResultPerPage = 3,
 };
 
-@interface SearchRequest : GPBMessage
+@interface ArtSearchRequest : GPBMessage
 
 /** 查询字符串 */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *query;
@@ -62,6 +93,73 @@ typedef GPB_ENUM(SearchRequest_FieldNumber) {
 
 /** 每页条数 */
 @property(nonatomic, readwrite) int32_t resultPerPage;
+
+@end
+
+#pragma mark - ArtTypeTest
+
+typedef GPB_ENUM(ArtTypeTest_FieldNumber) {
+  ArtTypeTest_FieldNumber_FloatValue = 1,
+  ArtTypeTest_FieldNumber_DoubleValue = 2,
+  ArtTypeTest_FieldNumber_BoolValue = 3,
+  ArtTypeTest_FieldNumber_Int32Value = 4,
+  ArtTypeTest_FieldNumber_StringValue = 5,
+  ArtTypeTest_FieldNumber_State = 6,
+  ArtTypeTest_FieldNumber_Data_p = 7,
+  ArtTypeTest_FieldNumber_TestObj = 8,
+  ArtTypeTest_FieldNumber_ObjListArray = 9,
+};
+
+@interface ArtTypeTest : GPBMessage
+
+@property(nonatomic, readwrite) float floatValue;
+
+@property(nonatomic, readwrite) double doubleValue;
+
+@property(nonatomic, readwrite) BOOL boolValue;
+
+@property(nonatomic, readwrite) int32_t int32Value;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *stringValue;
+
+@property(nonatomic, readwrite) ArtTypeTest_State state;
+
+/** NSData */
+@property(nonatomic, readwrite, copy, null_resettable) NSData *data_p;
+
+/** 缩放位置信息 */
+@property(nonatomic, readwrite, strong, null_resettable) ArtTestObject *testObj;
+/** Test to see if @c testObj has been set. */
+@property(nonatomic, readwrite) BOOL hasTestObj;
+
+/** NSMutableArray */
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<ArtTestObject*> *objListArray;
+/** The number of items in @c objListArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger objListArray_Count;
+
+@end
+
+/**
+ * Fetches the raw value of a @c ArtTypeTest's @c state property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ArtTypeTest_State_RawValue(ArtTypeTest *message);
+/**
+ * Sets the raw value of an @c ArtTypeTest's @c state property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetArtTypeTest_State_RawValue(ArtTypeTest *message, int32_t value);
+
+#pragma mark - ArtTestObject
+
+typedef GPB_ENUM(ArtTestObject_FieldNumber) {
+  ArtTestObject_FieldNumber_Name = 1,
+};
+
+@interface ArtTestObject : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *name;
 
 @end
 
